@@ -1,5 +1,6 @@
 package com.example.amibackend.DTO;
 
+import com.example.amibackend.entities.Detail;
 import com.example.amibackend.enums.Categorie;
 import lombok.Data;
 
@@ -13,5 +14,5 @@ public class ReclamationDTO {
     private LocalDateTime date;
     private String clientNom;
     private String clientPrenom;
-    private String detail;
+    private Detail detail;
 }

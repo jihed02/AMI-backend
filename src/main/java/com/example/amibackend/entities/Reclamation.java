@@ -27,5 +27,6 @@ public class Reclamation {
     @ManyToOne(fetch =FetchType.EAGER )
     @JsonBackReference
     private Client client;
-    private String detail;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Detail detail;
 }

@@ -6,7 +6,9 @@ import com.example.amibackend.entities.Reclamation;
 import com.example.amibackend.enums.Status;
 import com.example.amibackend.repositories.ClientRepository;
 import com.example.amibackend.repositories.ReclamationRepository;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,8 @@ public class ReclamationService {
     private ReclamationRepository reclamationRepo;
     @Autowired
     private ClientRepository clientRepository;
-
+    @PersistenceContext
+    private EntityManager entityManager;
     public List<Reclamation> getReclamations(){
 
         return this.reclamationRepo.findAll();
@@ -57,13 +60,18 @@ public class ReclamationService {
         Client client=this.clientRepository.findClientByEmail(email).get();
         return client.getReclamations();
     }
+    @Transactional
     public Reclamation addReclamation(Reclamation reclam){
         var reclamation=Reclamation.builder().categorie(reclam.getCategorie())
                 .detail(reclam.getDetail())
                 .client(reclam.getClient())
                 .status(false)
                 .date(LocalDateTime.now())
+                .categorie(reclam.getCategorie())
                 .build();
+        if(reclam.getDetail()!=null){
+            entityManager.merge(reclamation.getDetail());
+        }
             return this.reclamationRepo.save(reclamation);
         }
 

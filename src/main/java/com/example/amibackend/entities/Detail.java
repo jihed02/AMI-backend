@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class Detail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long DetailId;
+    private Long id;
     private String text;
 
 }
