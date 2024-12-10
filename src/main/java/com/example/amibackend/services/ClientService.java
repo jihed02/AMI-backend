@@ -1,6 +1,7 @@
 package com.example.amibackend.services;
 
-import com.example.amibackend.DTO.ClientDTO;
+import
+        com.example.amibackend.DTO.ClientDTO;
 import com.example.amibackend.entities.Client;
 import com.example.amibackend.enums.Role;
 import com.example.amibackend.repositories.ClientRepository;
